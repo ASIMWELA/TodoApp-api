@@ -1,5 +1,7 @@
 package com.todoapp.Todoapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -11,6 +13,9 @@ public class ToDo
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="todo_id")
     private int id;
+
+    @Column(name="title")
+    private String title;
 
     @Column(name="description")
     private String description;
@@ -33,7 +38,8 @@ public class ToDo
     @Column(name="priority")
     private int priority;
 
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id")
     private User user;
 
@@ -47,8 +53,9 @@ public class ToDo
         this.user = user;
     }
 
-    public ToDo(String description, Boolean completed, LocalDate dateCreated, LocalDate dateModified, Boolean important, Boolean urgent, int priority)
+    public ToDo(String title, String description, Boolean completed, LocalDate dateCreated, LocalDate dateModified, Boolean important, Boolean urgent, int priority)
     {
+        this.title = title;
         this.description = description;
         this.completed = completed;
         this.dateCreated = dateCreated;
@@ -60,6 +67,16 @@ public class ToDo
 
     public ToDo()
     {
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public int getId()
@@ -94,7 +111,7 @@ public class ToDo
 
     public LocalDate getDateCreated()
     {
-        return dateCreated;
+        return LocalDate.now();
     }
 
     public void setDateCreated(LocalDate dateCreated)
@@ -104,7 +121,7 @@ public class ToDo
 
     public LocalDate getDateModified()
     {
-        return dateModified;
+        return LocalDate.now();
     }
 
     public void setDateModified(LocalDate dateModified)
