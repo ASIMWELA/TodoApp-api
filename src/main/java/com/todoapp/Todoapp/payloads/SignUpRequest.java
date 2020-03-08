@@ -3,7 +3,8 @@ package com.todoapp.Todoapp.payloads;
 import javax.validation.constraints.*;
 
 
-public class SignUpRequest {
+public class SignUpRequest
+{
     @NotBlank
     @Size(min = 4, max = 40)
     private String firstName;

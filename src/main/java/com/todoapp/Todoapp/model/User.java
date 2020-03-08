@@ -12,6 +12,7 @@ public class User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="user_id")
     private int userId;
 
     @Column(name="first_name")
@@ -29,6 +30,9 @@ public class User
     @Column(name="roles")
     private String roles;
 
+    @OneToMany(mappedBy = "user")
+    private List<ToDo> todos;
+
     public User(String firstName, String lastName, String userName, String password, String roles)
     {
         this.firstName = firstName;
@@ -42,9 +46,19 @@ public class User
     {
     }
 
+    public List<ToDo> getTodos()
+    {
+        return todos;
+    }
+
+    public void setTodos(List<ToDo> todos)
+    {
+        this.todos = todos;
+    }
+
     public int getUserId()
     {
-        return this.userId;
+        return userId;
     }
 
     public void setUserId(int userId)
@@ -54,7 +68,7 @@ public class User
 
     public String getFirstName()
     {
-        return this.firstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName)
@@ -64,7 +78,7 @@ public class User
 
     public String getLastName()
     {
-        return this.lastName;
+        return lastName;
     }
 
     public void setLastName(String lastName)
@@ -74,7 +88,7 @@ public class User
 
     public String getUserName()
     {
-        return this.userName;
+        return userName;
     }
 
     public void setUserName(String userName)
@@ -84,7 +98,7 @@ public class User
 
     public String getPassword()
     {
-        return this.password;
+        return password;
     }
 
     public void setPassword(String password)
@@ -110,4 +124,5 @@ public class User
 
         return new ArrayList<>();
     }
+
 }

@@ -1,6 +1,7 @@
 package com.todoapp.Todoapp.configurations;
 
 import com.todoapp.Todoapp.security.CustomUserDetailService;
+import com.todoapp.Todoapp.security.JwtAuthenticationEntryPoint;
 import com.todoapp.Todoapp.security.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,11 +30,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
     @Autowired
     private JwtTokenFilter jwtTokenFilter;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         http.csrf().disable()
                 .cors().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
                 .authorizeRequests()
                 .antMatchers("/todo/api/auth/**")
                 .permitAll()

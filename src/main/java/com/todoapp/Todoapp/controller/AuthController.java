@@ -48,12 +48,12 @@ public class AuthController
 
 
     @PostMapping({"/login"})
-    public ResponseEntity Login(@RequestBody LoginRequest loginRequest) throws Exception {
+    public ResponseEntity Login(@RequestBody LoginRequest loginRequest) throws Exception
+    {
         try
         {
             authenticationManager.authenticate(new
                     UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
-            System.out.println(loginRequest.getPassword());
         }
         catch (BadCredentialsException e)
         {
@@ -68,19 +68,13 @@ public class AuthController
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-        if(userRepository.existsByUserName(signUpRequest.getUserName())) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest)
+    {
+        if(userRepository.existsByUserName(signUpRequest.getUserName()))
+        {
             return new ResponseEntity(new ApiResponse(false, "Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
-
-        // Creating user's account
-//        this.userId = userId;
-//        this.firstName = firstName;
-//        this.lastName = lastName;
-//        this.userName = userName;
-//        this.password = password;
-//        this.roles = roles;
 
         User user = new User(signUpRequest.getFirstName(), signUpRequest.getLastName(),
                 signUpRequest.getUserName(), signUpRequest.getPassword(), signUpRequest.getRoles());
@@ -91,11 +85,9 @@ public class AuthController
         User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentContextPath().path("/users/{username}")
-                .buildAndExpand(result.getUserName()).toUri();
+                .fromCurrentRequest().buildAndExpand(result.getUserName()).toUri();
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }
-
 
 }
