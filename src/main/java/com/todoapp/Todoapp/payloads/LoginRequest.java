@@ -1,8 +1,13 @@
 package com.todoapp.Todoapp.payloads;
 
+import javax.validation.constraints.NotBlank;
+
 public class LoginRequest
 {
+    @NotBlank
     private String userName;
+
+    @NotBlank
     private String password;
 
     public LoginRequest(String userName, String password)

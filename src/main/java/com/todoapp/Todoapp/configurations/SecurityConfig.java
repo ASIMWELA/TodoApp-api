@@ -45,9 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/todo/api/auth/**")
                 .permitAll()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/todo/api/admin").hasRole("ADMIN")
-                .antMatchers("/todo/api/add-todo/{userId}").hasAnyRole("ADMIN", "USER")
+                .authorizeRequests().anyRequest().fullyAuthenticated()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
