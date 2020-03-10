@@ -14,19 +14,19 @@ public class ToDo
     @Column(name="todo_id")
     private int id;
 
-    @Column(name="title")
+    @Column(name="title", length = 50)
     private String title;
 
-    @Column(name="description")
+    @Column(name="description", length = 150)
     private String description;
 
-    @Column(name="completed")
+    @Column(name="completed", length = 6)
     private Boolean completed;
 
-    @Column(name="creation_date")
+    @Column(name="creation_date", length = 15)
     private LocalDate dateCreated;
 
-    @Column(name="modified_date")
+    @Column(name="modified_date", length = 15)
     private LocalDate dateModified;
 
     @Column(name="important")
@@ -35,7 +35,7 @@ public class ToDo
     @Column(name="urgent")
     private Boolean urgent;
 
-    @Column(name="priority")
+    @Column(name="priority", length = 2)
     private int priority;
 
     @JsonIgnore

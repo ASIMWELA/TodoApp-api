@@ -22,7 +22,7 @@ public class SignUpRequest
     private String password;
 
     @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 10)
     private String roles;
 
     public String getFirstName()

@@ -84,8 +84,10 @@ public class AuthController
 
         User result = userRepository.save(user);
 
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest().buildAndExpand(result.getUserName()).toUri();
+        URI location =  ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("/todo/api/users/{userId}")
+                .buildAndExpand(result.getUserId()).toUri();
+
 
         return ResponseEntity.created(location).body(new ApiResponse(true, "User registered successfully"));
     }

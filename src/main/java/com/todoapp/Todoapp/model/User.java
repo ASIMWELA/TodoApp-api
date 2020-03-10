@@ -19,17 +19,17 @@ public class User
     @Column(name="user_id")
     private int userId;
 
-    @Column(name="first_name")
+    @Column(name="first_name",length = 50)
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name="last_name", length = 70)
     private String lastName;
 
-    @Column(name="user_name")
+    @Column(name="user_name", length = 20)
     private String userName;
 
     @JsonIgnore
-    @Column(name="password")
+    @Column(name="password", length = 100)
     private String password;
 
     @JsonIgnore
